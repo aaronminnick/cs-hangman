@@ -1,3 +1,16 @@
 .inline-h3 {
   display: inline;
 }
+
+#incorrect-guesses {
+  min-height: 20vh;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+#hangman-image img {
+  border: 2px solid slategray;
+}
