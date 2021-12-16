@@ -6,23 +6,50 @@
   <h2>Incorrect Guesses:</h2>
   @foreach (char guessed in Model.IncorrectGuesses)
   {
-    <h3>@guessed</h3>
+    <h3 class="inline-h3">@guessed</h3>
   }
   <h2>Guesses Remaining: @(6 - Model.IncorrectGuessCounter)</h2>
 </div>
 
-@* image of hangman *@
+<div id="hangman-image">
+@{
+  switch(Model.IncorrectGuessCounter)
+  {
+    case 0:
+      <img src="~/img/hangman0.png" alt="A drawing of hangman." />
+      break;
+    case 1:
+      <img src="~/img/hangman1.png" alt="A drawing of hangman." />
+      break;
+    case 2:
+      <img src="~/img/hangman2.png" alt="A drawing of hangman." />
+      break;
+    case 3:
+      <img src="~/img/hangman3.png" alt="A drawing of hangman." />
+      break;
+    case 4:
+      <img src="~/img/hangman4.png" alt="A drawing of hangman." />
+      break;
+    case 5:
+      <img src="~/img/hangman5.png" alt="A drawing of hangman." />
+      break;
+    case 6:
+      <img src="~/img/hangman6.png" alt="A drawing of hangman." />
+      break;
+  }
+}
+</div>
 
 <div id="fill-in-blanks">
   @foreach (char letter in Model.Word)
   {
     if (Model.CorrectLetters[letter] == true)
     {
-      <h3>@letter</h3>
+      <h3 class="inline-h3">@letter</h3>
     }
     else
     {
-      <h3>_</h3>
+      <h3 class="inline-h3">_</h3>
     }
   }
 </div>
