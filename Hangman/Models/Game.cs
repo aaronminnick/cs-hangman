@@ -8,6 +8,7 @@ namespace Hangman.Models
     private static List<string> _words = new List<string> {"banana", "dinosaur", "exclamation", "chocolate", "complication", "larynx", "banishment", "welcoming", "theocracy", "station", "speedboat", "lavender"};
     public string Word { get; }
     public Dictionary<char, bool> CorrectLetters { get; set; } = new Dictionary<char, bool> {};
+    public List<char> IncorrectGuesses { get; set; } = new List<char> {};
     public Game()
     {
       Random rand = new Random();
@@ -30,6 +31,31 @@ namespace Hangman.Models
           CorrectLetters.Add(Word[i], false);
         }
       }
+    }
+
+    public void Guess(string letter)
+    {
+      char guessed = letter[0];
+      if (CorrectLetters.ContainsKey(guessed))
+      {
+        CorrectLetters[guessed] = true;
+      }
+      else
+      {
+        IncorrectGuesses.Add(guessed);
+      }
+    }
+
+    public bool CheckForWin()
+    {
+      foreach (KeyValuePair<char, bool> letter in CorrectLetters)
+      {
+        if (letter.Value == false)
+        {
+          return false;
+        }
+      }
+      return true;
     }
   }
 }

@@ -28,5 +28,42 @@ namespace Hangman.Tests
       Dictionary<char, bool> testDict = new Dictionary<char, bool> {{'t', false}, {'e', false}, {'s', false}};
       CollectionAssert.AreEqual(testDict, newGame.CorrectLetters);
     }
+
+    [TestMethod]
+    public void Guess_SetsCorrectLetterToTrue_Bool()
+    {
+      Game newGame = new Game("test");
+      newGame.Guess("t");
+      Assert.AreEqual(true, newGame.CorrectLetters['t']);
+    }
+
+    [TestMethod]
+    public void Guess_AddsIncorrectGuessToList_List()
+    {
+      Game newGame = new Game("test");
+      newGame.Guess("n");
+      newGame.Guess("m");
+      List<char> testList = new List<char> {'n', 'm'};
+      CollectionAssert.AreEqual(testList, newGame.IncorrectGuesses);
+    }
+
+    [TestMethod]
+    public void CheckForWin_ReturnsTrueForWin_Bool()
+    {
+      Game newGame = new Game("test");
+      newGame.Guess("t");
+      newGame.Guess("e");
+      newGame.Guess("s");
+      Assert.AreEqual(true, newGame.CheckForWin());
+    }
+
+    [TestMethod]
+    public void CheckForWin_ReturnsFalseForNoWin_Bool()
+    {
+      Game newGame = new Game("test");
+      newGame.Guess("t");
+      newGame.Guess("e");
+      Assert.AreEqual(false, newGame.CheckForWin());
+    }
   }
 }
