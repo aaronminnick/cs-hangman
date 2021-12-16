@@ -48,7 +48,7 @@ namespace Hangman.Models
       {
         CorrectLetters[guessed] = true;
       }
-      else
+      else if (!IncorrectGuesses.Contains(guessed))
       {
         IncorrectGuesses.Add(guessed);
         IncorrectGuessCounter++;
