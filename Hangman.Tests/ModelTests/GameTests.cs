@@ -65,5 +65,25 @@ namespace Hangman.Tests
       newGame.Guess("e");
       Assert.AreEqual(false, newGame.CheckForWin());
     }
+
+    [TestMethod]
+    public void CheckForLose_ReturnsTrueForLose_Bool()
+    {
+      Game newGame = new Game("test");
+      newGame.Guess("r");
+      newGame.Guess("u");
+      newGame.Guess("i");
+      newGame.Guess("p");
+      newGame.Guess("o");
+      newGame.Guess("m");
+      Assert.AreEqual(true, newGame.CheckForLose());
+    }
+
+    [TestMethod]
+    public void CheckForLose_ReturnsFalseForNoLose_Bool()
+    {
+      Game newGame = new Game("test");
+      Assert.AreEqual(false, newGame.CheckForLose());
+    }
   }
 }

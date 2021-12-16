@@ -9,6 +9,7 @@ namespace Hangman.Models
     public string Word { get; }
     public Dictionary<char, bool> CorrectLetters { get; set; } = new Dictionary<char, bool> {};
     public List<char> IncorrectGuesses { get; set; } = new List<char> {};
+    public int IncorrectGuessCounter { get; set; } = 0;
     public Game()
     {
       Random rand = new Random();
@@ -43,6 +44,7 @@ namespace Hangman.Models
       else
       {
         IncorrectGuesses.Add(guessed);
+        IncorrectGuessCounter++;
       }
     }
 
@@ -56,6 +58,11 @@ namespace Hangman.Models
         }
       }
       return true;
+    }
+
+    public bool CheckForLose()
+    {
+      return IncorrectGuessCounter == 6;
     }
   }
 }
