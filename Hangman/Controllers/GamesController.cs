@@ -17,7 +17,7 @@ namespace Hangman.Controllers
       Game newGame;
       if (word != null)
       {
-        newGame = new Game(word);
+        newGame = new Game(word.ToLower());
       }
       else 
       {
@@ -31,6 +31,14 @@ namespace Hangman.Controllers
     {
       Game currentGame = Game.Find(id);
       return View(currentGame);
+    }
+
+    [HttpPost("/games/{id}")]
+    public ActionResult Update(int id, string letter)
+    {
+      Game currentGame = Game.Find(id);
+      currentGame.Guess(letter.ToLower());
+      return RedirectToAction("Show", new { id = currentGame.Id });
     }
   }
 }
