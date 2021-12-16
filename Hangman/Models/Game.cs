@@ -5,22 +5,29 @@ namespace Hangman.Models
 {
   public class Game
   {
+    private static List<Game> _instances = new List<Game> {};
     private static List<string> _words = new List<string> {"banana", "dinosaur", "exclamation", "chocolate", "complication", "larynx", "banishment", "welcoming", "theocracy", "station", "speedboat", "lavender"};
     public string Word { get; }
+    public int Id { get; } 
     public Dictionary<char, bool> CorrectLetters { get; set; } = new Dictionary<char, bool> {};
     public List<char> IncorrectGuesses { get; set; } = new List<char> {};
     public int IncorrectGuessCounter { get; set; } = 0;
+    
     public Game()
     {
       Random rand = new Random();
       Word = _words[rand.Next(0, _words.Count + 1)];
       MakeCorrectLetters();
+      _instances.Add(this);
+      Id = _instances.Count;
     }
 
     public Game(string word)
     {
       Word = word;
       MakeCorrectLetters();
+      _instances.Add(this);
+      Id = _instances.Count;
     }
 
     private void MakeCorrectLetters()
@@ -63,6 +70,11 @@ namespace Hangman.Models
     public bool CheckForLose()
     {
       return IncorrectGuessCounter == 6;
+    }
+
+    public static Game Find(int id)
+    {
+      return _instances[id-1];
     }
   }
 }
