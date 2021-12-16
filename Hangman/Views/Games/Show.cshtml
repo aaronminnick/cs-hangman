@@ -55,13 +55,13 @@
 </div>
 @if(Model.CheckForWin())
 {
-  //win
-  //link to new game
+  <h1>Congrats you win!</h1>
+  <a href="/games/new">Play a new game?</a>
 }
 else if(Model.CheckForLose())
 {
-  //lose
-  //link to new game
+  <h1>Sorry, you lost!</h1>
+  <a href="/games/new">Play a new game?</a>
 }
 else 
 {
